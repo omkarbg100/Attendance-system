@@ -1,0 +1,83 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import React from "react";
+import logo from '../assets/logo2.png';
+import { IoMdPerson } from "react-icons/io";
+import { FaLock } from "react-icons/fa6";
+
+const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      navigate('/home');
+    } else {
+      alert('Please enter valid credentials');
+    }
+  };
+
+  return (
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black"
+    >
+      <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-3xl">
+        {/* Left Panel */}
+        <div className="bg-[#1e3a8a] text-white flex flex-col justify-center items-center md:w-2/5 w-full p-6 md:p-8">
+          <h2 className="text-2xl font-bold mb-2">IIIT BHOPAL</h2>
+          <p className="text-sm text-center">Madhya Pradesh, India - 462003</p>
+          <img src={logo} alt="IIIT Logo" className="w-44 h-44 mt-6 border rounded-full" />
+        </div>
+
+        {/* Right Panel */}
+        <div className="w-full md:w-3/5 p-6 md:p-8 bg-white">
+          <h3 className="text-xl font-semibold text-gray-800 mb-2  text-center ">Login Panel</h3>
+          <p className="text-sm text-gray-600 mb-6 text-center ">Sign in to your account</p>
+          <form className="space-y-4" onSubmit={handleLogin}>
+            {/* Email Field */}
+            <div className="flex items-center border rounded px-3 py-2 ">
+              <IoMdPerson className="text-gray-500 mr-2 text-xl " />
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            {/* Password Field */}
+            <div className="flex items-center border rounded px-3 py-2 ">
+              <FaLock className="text-gray-500 mr-2 text-xl" />
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full focus:outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            {/* Login Button */}
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200 "
+            >
+              Login
+            </button>
+          </form>
+
+          {/* Footer */}
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Don’t have an account?{" "}
+            <Link to="/signin" className="text-blue-500 hover:underline">Sign Up</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
